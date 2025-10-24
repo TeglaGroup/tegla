@@ -6,6 +6,9 @@
 #include "drawingarea.h"
 
 void init_gl_state(void) {
+	puts(glGetString(GL_VERSION));
+	printf("%d\n", epoxy_gl_version());
+	
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glShadeModel(GL_FLAT);
 }
