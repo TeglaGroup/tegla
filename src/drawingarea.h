@@ -22,7 +22,6 @@ struct _TeglaDrawingArea {
 	GtkGLArea parent;
 #else
 	GtkDrawingArea parent;
-	
 	GdkGLConfig *config;
 #endif
 };
