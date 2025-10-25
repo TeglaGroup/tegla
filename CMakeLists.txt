@@ -17,8 +17,8 @@ find_package(PkgConfig REQUIRED)
 
 # Client
 if(USE_GTK2)
-	find_package(GTK2 REQUIRED COMPONENTS gtk gio)
-	pkg_check_modules(PC_DEPS REQUIRED IMPORTED_TARGET gtkglext-1.0 epoxy)
+	find_package(GTK2 REQUIRED COMPONENTS gtk)
+	pkg_check_modules(PC_DEPS REQUIRED IMPORTED_TARGET gtkglext-1.0 gio-2.0 epoxy)
 else()
 	pkg_check_modules(PC_DEPS REQUIRED IMPORTED_TARGET gtk+-3.0>=3.16 gio-2.0 epoxy)
 endif()
