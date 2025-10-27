@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6.0)
+cmake_minimum_required(VERSION 3.11.0)
 project(tegla)
 
 # Use ANSI C
@@ -25,6 +25,7 @@ endif()
 
 
 file(GLOB tegla_client_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
+list(REMOVE_ITEM tegla_client_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/server_main.c")
 add_executable(tegla_client ${tegla_client_SRC})
 
 if(USE_GTK2)
@@ -46,3 +47,15 @@ else()
 	message(STATUS "GUI: Gtk+ 3.0")
 endif()
 message(STATUS "")
+
+# Server
+set(tegla_server_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/server_main.c")
+add_executable(tegla_server ${tegla_server_SRC})
+
+# Link libraries your server might need (usually just GLib/GIO)
+pkg_check_modules(SERVER_DEPS REQUIRED IMPORTED_TARGET gio-2.0)
+target_link_libraries(tegla_server PRIVATE PkgConfig::SERVER_DEPS)
+
+if(MATH_LIB)
+    target_link_libraries(tegla_server PRIVATE ${MATH_LIB})
+endif()

@@ -85,6 +85,8 @@ int main(int argc, char *argv[]) {
 	/* create window */
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);  
+	gtk_window_set_title(GTK_WINDOW(window), "Tegla");
+	gtk_window_set_default_size(GTK_WINDOW(window), 800, 600);
 	
 	/* gl area */
 	gl_area = tegla_drawing_area_new();
