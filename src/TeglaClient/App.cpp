@@ -3,8 +3,7 @@
 #include <Mw/Milsko.h>
 #include <Mw/Widget/OpenGL.h>
 
-#include <chrono>
-#include <thread>
+// TODO: everything
 
 void App::Initialize() {
     mainWindow = MwVaCreateWidget(MwWindowClass, "main", nullptr, MwDEFAULT, MwDEFAULT, 800, 600,
@@ -33,7 +32,7 @@ void App::GameLoop() {
 }
 
 void App::Run() {
-    MwLoop(mainWindow); // blocks until window closes
+    MwLoop(mainWindow);
 
     isRunning = false;
 
