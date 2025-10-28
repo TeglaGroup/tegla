@@ -1,0 +1,3 @@
+[submodule "vendor/milsko"]
+	path = vendor/milsko
+	url = https://github.com/pyrite-dev/milsko.git
