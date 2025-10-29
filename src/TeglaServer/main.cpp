@@ -1,6 +1,8 @@
 #include "TeglaServer/Game/World.h"
 #include "TeglaServer/NetworkServer.h"
 
+#include "TeglaCore/ScriptingCore.h"
+
 #include <atomic>
 #include <iostream>
 #include <thread>
@@ -8,6 +10,7 @@
 int main(int argc, char** argv) {
 	NetworkServer server(4000);
 	World gameWorld;
+	ScriptingCore scripting;
 
 	server.Start();
 
@@ -22,7 +25,10 @@ int main(int argc, char** argv) {
             if (std::getline(std::cin, cmd)) {
                 if (cmd == "quit" || cmd == "exit") {
                     isRunning = false;
-                } else {
+                } else if (cmd.rfind("eval ", 0) == 0) {
+					std::string code = cmd.substr(5);
+					scripting.RunEval(code);
+				} else {
 					std::cout << "unknown command: " << cmd << std::endl;
 				}
             }

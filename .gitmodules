@@ -7,3 +7,6 @@
 [submodule "vendor/raknet"]
 	path = vendor/raknet
 	url = https://github.com/Hedy88/raknet.git
+[submodule "vendor/quickjs-ng"]
+	path = vendor/quickjs-ng
+	url = https://github.com/quickjs-ng/quickjs.git
