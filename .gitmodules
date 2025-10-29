@@ -1,3 +1,6 @@
 [submodule "vendor/milsko"]
 	path = vendor/milsko
 	url = https://github.com/pyrite-dev/milsko.git
+[submodule "vendor/TeglaMixer"]
+	path = vendor/TeglaMixer
+	url = https://github.com/TeglaGroup/mixer
