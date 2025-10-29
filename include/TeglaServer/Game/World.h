@@ -2,6 +2,6 @@
 
 class World {
 public:
-    void Update(float deltaTime);
-    void BroadcastState();
+	void Update(float deltaTime);
+	void BroadcastState();
 };

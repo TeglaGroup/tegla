@@ -6,19 +6,19 @@
 #include <mutex>
 
 class App {
-      public:
+public:
 	void Initialize();
 	void Run();
 	void Shutdown();
 
-	void	    GameLoop();
+	void GameLoop();
 	static void TickHandler(void* widget, void* event, void* userdata);
 	std::mutex  stateMutex;
 
-      private:
+private:
 	MwWidget mainWindow;
 	MwWidget openGLWidget;
 
-	std::thread	  logicThread;
+	std::thread	logicThread;
 	std::atomic<bool> isRunning{false};
 };
