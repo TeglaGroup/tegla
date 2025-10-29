@@ -11,3 +11,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/TeglaMixer/CMakeLists.txt")
 else()
     message(FATAL_ERROR "Mixer has not been found in vendor/. Please make sure all submodules have been cloned.")
 endif()
+
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/raknet/CMakeLists.txt")
+    add_subdirectory(raknet)
+else()
+    message(FATAL_ERROR "RakNet has not been found in vendor/. Please make sure all submodules have been cloned.")
+endif()
