@@ -5,6 +5,7 @@
 
 #include <atomic>
 #include <iostream>
+#include <queue>
 #include <thread>
 
 int main(int argc, char** argv) {
@@ -15,6 +16,9 @@ int main(int argc, char** argv) {
 	server.Start();
 
 	std::atomic<bool> isRunning{true};
+
+	std::queue<std::string> evalQueue;
+	std::mutex evalMutex;
 	
 	// console input thread, rn it's just a lambda that waits for "quit" command
 	std::thread console([&]() {
@@ -26,8 +30,8 @@ int main(int argc, char** argv) {
                 if (cmd == "quit" || cmd == "exit") {
                     isRunning = false;
                 } else if (cmd.rfind("eval ", 0) == 0) {
-					std::string code = cmd.substr(5);
-					scripting.RunEval(code);
+					std::lock_guard<std::mutex> lock(evalMutex);
+					evalQueue.push(cmd.substr(5));
 				} else {
 					std::cout << "unknown command: " << cmd << std::endl;
 				}
@@ -46,6 +50,20 @@ int main(int argc, char** argv) {
 		// TODO: this does nothing yet, just there for structure
         gameWorld.Update(deltaTime);
         gameWorld.BroadcastState();
+
+		{
+			// run queued evals
+			std::lock_guard<std::mutex> lock(evalMutex);
+			while (!evalQueue.empty()) {
+				scripting.RunEval(evalQueue.front());
+				evalQueue.pop();
+			}
+		}			
+
+		// fire scripting events
+		JSValue arg2 = JS_NewFloat64(scripting.context, deltaTime);
+		scripting.FireEvent("onServerTick", 1, &arg2);
+		JS_FreeValue(scripting.context, arg2);
 
 		// sleep until next tick
         auto end = std::chrono::high_resolution_clock::now();
