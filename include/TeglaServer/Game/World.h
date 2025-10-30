@@ -1,7 +1,7 @@
 #pragma once
 
 class World {
-public:
+      public:
 	void Update(float deltaTime);
 	void BroadcastState();
 };
