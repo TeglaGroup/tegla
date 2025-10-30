@@ -3,7 +3,7 @@
 	url = https://github.com/pyrite-dev/milsko.git
 [submodule "vendor/TeglaMixer"]
 	path = vendor/TeglaMixer
-	url = https://github.com/TeglaGroup/mixer.gits
+	url = ../mixer.git
 [submodule "vendor/raknet"]
 	path = vendor/raknet
 	url = https://github.com/Hedy88/raknet.git
